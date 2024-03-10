@@ -10,11 +10,12 @@ import shlex
 from models.__init__ import storage
 from models.base_model import BaseModel
 
+
 class HBNBCommand(cmd.Cmd):
     """
     Command interpreter for HBNB project.
     """
-    
+
     prompt = "(hbnb) "
     valid_classes = {'BaseModel': BaseModel}
 
@@ -93,7 +94,7 @@ class HBNBCommand(cmd.Cmd):
             if k in all_objs:
                 print(all_objs[k])
             else:
-                print("** no instance found **")    
+                print("** no instance found **")
 
     def do_all(self, arg):
         """
