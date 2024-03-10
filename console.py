@@ -16,6 +16,7 @@ from models.amenity import Amenity
 from models.place import Place
 from models.user import User
 
+
 class HBNBCommand(cmd.Cmd):
     """
     Command interpreter for HBNB project.

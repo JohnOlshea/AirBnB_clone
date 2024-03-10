@@ -36,7 +36,7 @@ class FileStorage:
         Sets in __objects the obj with key <obj class name>.id.
 
         Args:
-            obj (BaseModel): The object to add.        
+            obj (BaseModel): The object to add.
         """
         key = f"{obj.__class__.__name__}.{obj.id}"
         FileStorage.__objects[key] = obj
@@ -62,4 +62,4 @@ class FileStorage:
                     value = eval(value["__class__"])(**value)
                     self.__objects[key] = value
         except Exception:
-            pass        
+            pass
