@@ -112,22 +112,17 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """
-        Prints all string representation of all instances
+        Prints all string representation of all instances based
+        or not on the class name.
         """
-        args = shlex.split(arg)
-        if args and args[0]:
-            try:
-                cls = eval(args[0])
-            except NameError:
-                print("** class doesn't exist **")
-                return
-
-        all_objs = storage.all()
-        result = []
-        for obj_key in all_objs:
-            if not args or all_objs[obj_key].__class__ == cls:
-                result.append(str(all_objs[obj_key]))
-        print(result)
+        args = arg.split()
+        if len(args) == 0:
+            print("** class name missing **")
+        elif args[0] not in HBNBCommand.valid_classes:
+            print("** class doesn't exist **")
+        else:
+            objects = storage.all(args[0])
+            print(objects)        
 
     def do_destroy(self, arg):
         """
