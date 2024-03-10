@@ -4,7 +4,12 @@ This class handles the serialization and deserialization of
 BaseModel instances to and from a JSON file.
 """
 import json
+from models.amenity import Amenity
+from models.city import City
+from models.review import Review
+from models.place import Place
 from models.user import User
+from models.state import State
 from models.base_model import BaseModel
 
 

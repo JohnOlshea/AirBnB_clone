@@ -9,8 +9,12 @@ import cmd
 import shlex
 from models.__init__ import storage
 from models.base_model import BaseModel
+from models.city import City
+from models.state import State
+from models.review import Review
+from models.amenity import Amenity
+from models.place import Place
 from models.user import User
-
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -20,7 +24,12 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     valid_classes = {
         "BaseModel": BaseModel,
+        "City": City,
+        "State": State,
         "User": User,
+        "Review": Review,
+        "Amenity": Amenity,
+        "Place": Place
     }
 
     def do_quit(self, arg):
