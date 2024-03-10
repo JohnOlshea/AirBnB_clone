@@ -5,13 +5,17 @@ import unittest
 from datetime import datetime
 from models.base_model import BaseModel
 
+
 class TestBaseModel(unittest.TestCase):
     """Tests for the BaseModel class."""
 
     def test_instantiation(self):
-        """Tests that a BaseModel instance is created with the correct attributes."""
+        """
+        Tests that a BaseModel instance is created
+        with the correct attributes.
+        """
         my_model = BaseModel()
-        self.assertIsInstance(my_model, BaseModel);
+        self.assertIsInstance(my_model, BaseModel)
         self.assertTrue(hasattr(my_model, "id"))
         self.assertTrue(hasattr(my_model, "created_at"))
         self.assertTrue(hasattr(my_model, "updated_at"))
@@ -35,7 +39,10 @@ class TestBaseModel(unittest.TestCase):
         my_model.name = "My First Model"
         my_model.my_number = 89
         model_dict = my_model.to_dict()
-        expected_keys = ['id', 'created_at', 'updated_at', '__class__', 'name', 'my_number']
+        expected_keys = [
+            'id', 'created_at', 'updated_at',
+            '__class__', 'name', 'my_number'
+        ]
         self.assertEqual(sorted(model_dict.keys()), sorted(expected_keys))
         self.assertEqual(model_dict['__class__'], 'BaseModel')
         self.assertEqual(model_dict['id'], my_model.id)
@@ -44,5 +51,6 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(type(model_dict["created_at"]), str)
         self.assertEqual(type(model_dict["updated_at"]), str)
 
+
 if __name__ == '__main__':
-    unittest.main()        
+    unittest.main()
