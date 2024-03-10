@@ -172,7 +172,7 @@ class HBNBCommand(cmd.Cmd):
         count = 0
         sp_arg = args[1].split('"')
         args_cmd = sp_arg[0]
-
+        
         if args[0] in HBNBCommand.valid_classes:
             if args[1] == "all()":
                 self.do_all(args[0])
@@ -190,6 +190,16 @@ class HBNBCommand(cmd.Cmd):
                 arg_id = sp_arg[1]
                 arg = args[0] + " " + arg_id
                 self.do_destroy(arg)
+            elif args_cmd == "update(":
+                update_args = sp_arg[1].split(", ")
+                if len(update_args) == 3:
+                    obj_id = update_args[0]
+                    attr_name = update_args[1]
+                    attr_value = update_args[2][:-1]  # Remove trailing ')'
+                    update_cmd = f"{args[0]} {obj_id} {attr_name} {attr_value}"
+                    self.do_update(update_cmd)
+                else:
+                    print("Invalid 'update' command format.")
 
 
 if __name__ == '__main__':
