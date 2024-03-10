@@ -163,6 +163,34 @@ class HBNBCommand(cmd.Cmd):
                 del all_objs[k]
                 storage.save()
 
+    def default(self, line):
+        """
+        Method to handle custom commands.
+        """
+        args = line.split(".")
+        all_objs = storage.all()
+        count = 0
+        sp_arg = args[1].split('"')
+        args_cmd = sp_arg[0]
+
+        if args[0] in HBNBCommand.valid_classes:
+            if args[1] == "all()":
+                self.do_all(args[0])
+            elif args[1] == "count()":
+                for k in all_objs.keys():
+                    key = k.split(".")
+                    if args[0] == key[0]:
+                        count += 1
+                print(count)
+            elif args_cmd == "show(":
+                arg_id = sp_arg[1]
+                arg = args[0] + " " + arg_id
+                self.do_show(arg)
+            elif args_cmd == "destroy(":
+                arg_id = sp_arg[1]
+                arg = args[0] + " " + arg_id
+                self.do_destroy(arg)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
