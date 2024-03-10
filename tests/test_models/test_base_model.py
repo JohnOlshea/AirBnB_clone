@@ -9,7 +9,35 @@ from models.base_model import BaseModel
 class TestBaseModel(unittest.TestCase):
     """Tests for the BaseModel class."""
 
-    def test_instantiation(self):
+    def test_instantiation_with_kwargs(self):
+        """
+        Test initializing BaseModel instance with
+        dictionary representation.
+        """
+        todays_date = datetime.today()
+        today_iso = todays_date.isoformat()
+        data = {
+            'id': 'b7e43f1c-2fea-44b3-b04b-edff5e6598fe',
+            'created_at': today_iso,
+            'updated_at': today_iso,
+            'name': 'Test Model',
+            'my_number': 42,
+            '__class__': 'BaseModel'
+        }
+        base_model = BaseModel(**data)
+
+        self.assertEqual(base_model.id, data["id"])
+        self.assertEqual(
+            base_model.created_at,
+            datetime.fromisoformat(data["created_at"])
+        )
+        self.assertEqual(
+            base_model.updated_at,
+            datetime.fromisoformat(data["updated_at"])
+        )
+        self.assertEqual(base_model.name, data["name"])
+
+    def test_instantiation_with_None_kwargs(self):
         """
         Tests that a BaseModel instance is created
         with the correct attributes.
