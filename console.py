@@ -114,18 +114,34 @@ class HBNBCommand(cmd.Cmd):
         """Prints all string representation of all instances based
         or not on the class name.
         """
-        all_objects = storage.all()
+        args = shlex.split(arg)
+        if args and args[0]:
+            try:
+                cls = eval(args[0])
+            except NameError:
+                print("** class doesn't exist **")
+                return
 
+        all_objs = storage.all()
+        result = []
+        for obj_key in all_objs:
+            if not args or all_objs[obj_key].__class__ == cls:
+                result.append(str(all_objs[obj_key]))
+        print(result)
+
+    def do_count(self, arg):
+        """
+        Retrieve the number of instances of a class.
+        """
+        args = arg.split()
         if len(args) == 0:
-            object_list = [str(value) for value in all_objects.values()]
-        elif args in HBNBCommand.cmd_classes:
-            object_list = [str(value) for key, value in all_objects.items()
-                           if args in key]
-        else:
+            print("** class name missing **")
+        elif args[0] not in HBNBCommand.valid_classes:
             print("** class doesn't exist **")
-            return False
-
-        print(object_list)        
+        else:
+            objects = storage.all(args[0])
+            count = len(objects)
+            print(count)
 
     def do_destroy(self, arg):
         """
